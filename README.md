@@ -1,2 +1,1 @@
-sqlsm
-=====
+# MySQL Snapshot Manager

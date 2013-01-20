@@ -1,0 +1,17 @@
+{
+	"name": "sqlsm",
+	"version": "0.0.1",
+	"author": {
+		"name":  "Ian Remmel",
+		"email": "engineering@ianwremmel.com",
+		"url":   "http://ianwremmel.com/"
+	},
+	"bin": {
+		"sqlsm": "./bin/sqlsm"
+	},
+	"dependencies": {
+		"cli": "*",
+		"lodash": "*",
+		"shelljs": "*"
+	}
+}
