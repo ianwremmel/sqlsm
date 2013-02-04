@@ -9,6 +9,9 @@
 	"bin": {
 		"sqlsm": "./bin/sqlsm"
 	},
+	"main": {
+		"lib/sqlsm.js"
+	},
 	"dependencies": {
 		"cli": "*",
 		"lodash": "*",
