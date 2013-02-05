@@ -1,4 +1,5 @@
 #!/usr/bin/env node
 
-var sqlsm = require('../lib/cli.js');
+require('coffee-script');
+var sqlsm = require('../lib/cli');
 sqlsm.dispatch();
