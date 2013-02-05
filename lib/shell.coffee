@@ -3,15 +3,6 @@ cli = require 'cli'
 sqlsm = require './sqlsm'
 require 'shelljs/global'
 
-actions = [
-	'init'
-	'list'
-	'use'
-	'info'
-	'snapshot'
-	'restore'
-]
-
 module.exports =
 	dispatch: ->
 		# Make sure we have git
@@ -22,7 +13,7 @@ module.exports =
 		action = process.argv[2]
 
 		if action of sqlsm
-			options = cli.parse(sqlsm[action].options, actions)
+			options = cli.parse(sqlsm[action].options, _.keys(sqlsm))
 			sqlsm[action].dispatch(options)
 		else
-			cli.parse({}, actions)
+			cli.parse({}, _.keys(sqlsm))
