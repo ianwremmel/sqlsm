@@ -1,6 +1,6 @@
 _ = require 'lodash'
 cli = require 'cli'
-
+sqlsm = require './sqlsm'
 require 'shelljs/global'
 
 actions = [
@@ -21,9 +21,8 @@ module.exports =
 
 		action = process.argv[2]
 
-		if _.contains(actions, action)
-			action = require('./actions/' + action)
-			options = cli.parse(action.options, actions)
-			action.dispatch(options)
-
+		if action of sqlsm
+			options = cli.parse(sqlsm[action].options, actions)
+			sqlsm[action].dispatch(options)
+		else
 			cli.parse({}, actions)

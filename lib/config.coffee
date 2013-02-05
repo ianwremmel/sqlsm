@@ -1,9 +1,15 @@
 fs = require 'fs'
 
+config = {}
 
 # Helper for determining the user's home directory.
 getHome = ->
-	process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME']
+	if process.platform is 'win32'
+		varname = 'USERPROFILE'
+	else
+		varname = 'HOME'
+
+	process.env[varname]
 
 save = ->
 	fs.writeFileSync(config_filename, JSON.stringify(config, null, '\t'));
@@ -14,7 +20,7 @@ if fs.existsSync(config_filename)
 	config_raw = fs.readFileSync(config_filename)
 	config = JSON.parse(config_raw)
 else
-	config.dir = getHome() + '/.sqlsm.d'
+	config.snapshot_dir = getHome() + '/.sqlsm.d'
 	save()
 
 module.exports =

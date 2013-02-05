@@ -1,4 +1,4 @@
-exports = (config) ->
+module.exports = (config) ->
 
 	fs = require 'fs'
 	require 'shelljs/global'
@@ -12,7 +12,7 @@ exports = (config) ->
 		cmd = config.get('mysqldump') +
 			' --user=' + username +
 			' --password=' + password +
-			'--skip-dump-date ' +
+			' --skip-dump-date ' +
 			database
 
 		dump = exec(cmd, {silent: true})
@@ -31,7 +31,7 @@ exports = (config) ->
 		if not fs.existsSync config.get('snapshot_dir')
 			fs.mkdirSync config.get('snapshot_dir')
 
-			#TODO get mysql and mysqldump interactively
+			# TODO get mysql and mysqldump interactively if they can't be found
 			config.set('mysqldump', 'mysqldump');
 			config.set('mysql', 'mysql');
 
@@ -39,9 +39,9 @@ exports = (config) ->
 		database: ['d', 'Database', 'string']
 		username: ['u', 'Database Username', 'string']
 		password: ['p', 'Database Password', 'string']
-		mysql: [false, 'Path to MySQL binary (defaults to `mysql`)', 'string', 'mysql']
-		mysqldump: [false, 'Path to MySQL Dump binary (defaults to `mysqldump`)', 'string', 'mysqldump']
 	dispatch: (options) ->
+		init()
+
 		dir = config.get('snapshot_dir') + '/' + options.database
 		if fs.existsSync(dir)
 			console.error('Attempted to reinitialize an existing snapshot chain.');
