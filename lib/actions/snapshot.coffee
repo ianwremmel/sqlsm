@@ -8,12 +8,12 @@ module.exports = (config) ->
 	options:
 		name: ['n', 'Snapshot name', 'string']
 	dispatch: (options) ->
-		if config.current?
-			cd config.get('snapshot_dir') + '/' + config.get('database')
+		if config.get('current')?
+			cd config.get('snapshot_dir') + '/' + config.get('current')
 
-			username = exec('git config sqlsm.username').output
+			username = exec('git config sqlsm.username', silent: true).output
 
-			password = exec('git config sqlsm.username')
+			password = exec('git config sqlsm.password', silent: true)
 			if (password.code is 0)
 				password = password.output
 			else
@@ -21,7 +21,7 @@ module.exports = (config) ->
 				console.log 'interactive password collection not yet implemented'
 				process.exit 3
 
-			util.snapshot(config.current, username, password, Date.toIsoString())
+			util.snapshot(config.get('current'), username, password, new Date().toISOString())
 
 			if options.name?
 				exec 'git tag ' + options.name
