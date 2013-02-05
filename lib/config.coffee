@@ -1,3 +1,4 @@
+_ = require 'lodash'
 fs = require 'fs'
 
 config = {}
@@ -29,3 +30,5 @@ module.exports =
 	set: (key, value) ->
 		config[key] = value
 		save()
+	list: ->
+		_.clone(config, true)
