@@ -10,6 +10,18 @@ module.exports = (config) ->
 	dispatch: (options) ->
 		util.init()
 
+		if not options.database?
+			console.error('Please specify a database')
+			process.exit(1)
+
+		if not options.username?
+			console.error('Please specify a username')
+			process.exit(1)
+
+		if not options.password?
+			console.error('Please specify a password')
+			process.exit(1)
+
 		dir = config.get('snapshot_dir') + '/' + options.database
 		if fs.existsSync(dir)
 			console.error('Attempted to reinitialize an existing snapshot chain.');

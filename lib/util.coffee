@@ -23,6 +23,7 @@ module.exports = (config) ->
 		exec 'git commit -m "' + message + '"'
 		# TODO checked exit code
 
+	# makes sure the settings file and the snapshot directory exists
 	init: () ->
 		if not fs.existsSync config.get('snapshot_dir')
 			fs.mkdirSync config.get('snapshot_dir')
