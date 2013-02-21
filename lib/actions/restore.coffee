@@ -40,8 +40,12 @@ module.exports = (config) ->
 				console.error 'Could not create database'
 				process.exit 4
 
-			# Checkout lateset (or specified) commit
+			# Checkout latest (or specified) commit
 			cd config.get('snapshot_dir') + '/' + database
+			if options.name?
+				exec 'git checkout ' + options.name, silent: true
+			else
+				exec 'git checkout master', silent: true
 
 			# Restore the database
 			cmd = config.get('mysql') +

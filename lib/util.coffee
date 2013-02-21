@@ -7,6 +7,9 @@ module.exports = (config) ->
 	snapshot: (database, username, password, message) ->
 		cd config.get('snapshot_dir') + '/' + database
 
+		# We always need to be on a branch to commit
+		exec 'git checkout master', silent: true
+
 		cmd = config.get('mysqldump') +
 			' --user=' + username +
 			' --password=' + password +
