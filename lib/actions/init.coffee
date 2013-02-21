@@ -1,6 +1,6 @@
 module.exports = (config) ->
 	fs = require 'fs'
-	util = require '../util'
+	util = require('../util')(config)
 	require 'shelljs/global'
 
 	options:

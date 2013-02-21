@@ -1,4 +1,6 @@
 module.exports = (config) ->
+	fs = require 'fs'
+
 	readOptions: (options) ->
 		# TODO
 
