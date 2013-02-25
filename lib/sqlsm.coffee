@@ -8,6 +8,5 @@ sqlsm =
 	list: require('./actions/list')(config)
 	restore: require('./actions/restore')(config)
 	snapshot: require('./actions/snapshot')(config)
-	use: require('./actions/use')(config)
 
 module.exports = sqlsm
