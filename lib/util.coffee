@@ -14,14 +14,13 @@ module.exports = (config) ->
 			' --user=' + username +
 			' --password=' + password +
 			' --skip-dump-date ' +
-			database
+			database +
+			' > snapshot.sql'
 
 		dump = exec(cmd, {silent: true})
 		if dump.code isnt 0
 			console.error dump.output
 			process.exit 1
-
-		fs.writeFileSync('snapshot.sql', dump.output)
 
 		exec 'git add snapshot.sql'
 		# TODO checked exit code

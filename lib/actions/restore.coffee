@@ -7,10 +7,10 @@ module.exports = (config) ->
 
 	options:
 		name: ['n', 'Snapshot name', 'string']
+		database: ['d', 'Database', 'string']
 	dispatch: (options) ->
-		database = config.get('current')
-		if database?
-			cd config.get('snapshot_dir') + '/' + config.get('current')
+		if options.database?
+			cd config.get('snapshot_dir') + '/' + options.database
 
 			username = exec('git config sqlsm.username', silent: true).output.trim()
 
@@ -26,7 +26,7 @@ module.exports = (config) ->
 			cmd = config.get('mysqladmin') +
 				' --user=' + username +
 				' --password=' + password +
-				' drop ' + database + ' -f'
+				' drop ' + options.database + ' -f'
 			if exec(cmd, {silent: true}).code is not 0
 				console.error 'Could not drop database'
 				process.exit 3
@@ -35,13 +35,13 @@ module.exports = (config) ->
 			cmd = config.get('mysqladmin') +
 				' --user=' + username +
 				' --password=' + password +
-				' create ' + database
+				' create ' + options.database
 			if exec(cmd, {silent: true}).code is not 0
 				console.error 'Could not create database'
 				process.exit 4
 
 			# Checkout latest (or specified) commit
-			cd config.get('snapshot_dir') + '/' + database
+			cd config.get('snapshot_dir') + '/' + options.database
 			if options.name?
 				exec 'git checkout ' + options.name, silent: true
 			else
@@ -51,11 +51,11 @@ module.exports = (config) ->
 			cmd = config.get('mysql') +
 				' --user=' + username +
 				' --password=' + password +
-				' ' + database +
+				' ' + options.database +
 				' < snapshot.sql'
 			if exec(cmd).code is not 0
 				console.error 'Could not restore database'
 				process.exit 5
 
 		else
-			console.error 'Please specify a database with `sqlsm use`'
+			console.error 'Please specify a database'
