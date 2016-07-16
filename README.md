@@ -1,4 +1,4 @@
-# MySQL Snapshot Manager
+# MySQL Snapshot Manager [![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
 
 ## TODO
 
