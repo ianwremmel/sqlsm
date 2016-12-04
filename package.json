@@ -10,9 +10,9 @@
 		"sqlsm": "./bin/sqlsm"
 	},
   "dependencies": {
-    "lodash": "~1.0.0-rc.3",
-    "coffee-script": "~1.4.0",
-    "shelljs": "~0.1.2",
-    "cli": "~0.4.4-2"
+    "lodash": "~4.17.2",
+    "coffee-script": "~1.12.0",
+    "shelljs": "~0.7.5",
+    "cli": "~1.0.1"
   }
 }
